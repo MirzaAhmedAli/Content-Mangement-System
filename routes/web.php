@@ -23,15 +23,17 @@ Route::get('register', [App\Http\Controllers\RegisterController::class, 'create'
 Route::post('register', [App\Http\Controllers\RegisterController::class, 'store']);
 Route::get('login', [App\Http\Controllers\LogController::class, 'login'])->name('login');
 Route::post('login', [App\Http\Controllers\LogController::class, 'userLogin']);
-Route::get('main', [App\Http\Controllers\RegisterController::class, 'mainpage'])->middleware('auth')->name('main');
-Route::get('logout', [App\Http\Controllers\LogController::class, 'logout'])->middleware('auth')->name('logout');
-//Route::get('forgotpassword', [App\Http\Controllers\ForgotPasswordController::class, 'edit'])->name('edit');
+Route::get('main', [App\Http\Controllers\MainPageController::class, 'index'])->middleware('auth')->name('main');
+Route::get('about',[App\Http\Controllers\MainPageController::class, 'about'])->middleware('auth')->name('about');
 
+Route::get('logout', [App\Http\Controllers\LogController::class, 'logout'])->middleware('auth')->name('logout');
+
+Route::middleware('guest')->group(function () {
     Route::get('/forgot-password', [App\Http\Controllers\ForgotPasswordController::class, 'forgotpassword'])->name('password.request');
     Route::post('/ahmed', [App\Http\Controllers\ForgotPasswordController::class, 'forgotPasswordPost'])->name('password.reset');
     Route::get('/reset-password/{token}', [App\Http\Controllers\ForgotPasswordController::class, 'resetpassword']);
     Route::post('/reset-password', [App\Http\Controllers\ForgotPasswordController::class, 'resetpasswordpost'])->name('reset.password.post');
-
+});
     
  
 

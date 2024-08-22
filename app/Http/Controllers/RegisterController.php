@@ -13,7 +13,7 @@ class RegisterController extends Controller
 {
     public function create()
     {
-        return view('auth.register');   
+        return view('auth.register',);   
     }
 
     public function store(RegisterRequest $request)
@@ -25,18 +25,6 @@ class RegisterController extends Controller
     ]);
         event(new Registered($user));
             Auth::login($user);
-            return redirect('login')->withSuccess('You are Registered & Logged in!');
-    }
-
-    // public function mainpage()
-    // {
-    //     if(Auth::check())
-    //     {
-    //         return view('pages.main');
-    //     }
-        
-    //     return redirect()->route('login')->withErrors([
-    //         'email' => 'Please login to access the dashboard.',
-    //     ])->onlyInput('email');
-    // }
+            return redirect('main')->withSuccess('You are Registered & Logged in!');
+    }   
 }
