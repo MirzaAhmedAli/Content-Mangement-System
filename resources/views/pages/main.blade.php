@@ -5,7 +5,9 @@
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <div class="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpdwzl5xFixobB8a2WDwBgKzjNUeFfyiWkVw&s" class="h-8" alt="Flowbite Logo" />
-        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">AutoCar</span>
+        <a href="{{route('main')}}">
+          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">AutoCar</span>
+        </a>      
       </div>
     <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
         <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
@@ -48,25 +50,38 @@
         <li>
           <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Profile</a>
         </li>
+        @if (auth()->user()->isAdmin == 1)
         <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Users</a>
+          <a href="{{route('users.index')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Users</a>
         </li>
+        @endif
       </ul>
     </div>
     </div>
   </nav>
-
+  
   <div class="px-6 py-8 bg-cover bg-center" style="background-image: url('https://i.pinimg.com/originals/2b/de/7d/2bde7d14133968f97d6c4dd898edb989.gif ');">
-      <div class="container flex justify-between mx-auto">
+    @if (session('status'))
+    <div class="px-4 sm:px-6 lg:px-8 mt-6 mr-20">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 overflow-hidden shadow-sm sm:rounded-lg font-mono text-lg">
+            <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="alert alert-success">{{session('status')}}</div>  
+            </div>
+        </div>        
+        </div>     
+    </div>   
+    @endif  
+    <div class="container flex justify-between mx-auto">
           <div class="w-full lg:w-8/12">
               <div class="flex items-center justify-between">
                   <h1 class="text-xl font-bold text-orange-600 md:text-4xl">Posts</h1>
-                  <div>
+                  {{-- <div>
                       <select class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                           <option>Latest</option>
                           <option>Last Week</option>
                       </select>
-                  </div>
+                  </div> --}}
               </div>
               <div class="mt-6">
                   <div class="max-w-4xl px-10 py-6 mx-auto text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800   rounded-lg shadow-md">

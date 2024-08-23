@@ -25,6 +25,6 @@ class RegisterController extends Controller
     ]);
         event(new Registered($user));
             Auth::login($user);
-            return redirect('main')->withSuccess('You are Registered & Logged in!');
+            return redirect('main')->with('status','You are Registered & Logged in!');
     }   
 }

@@ -21,11 +21,11 @@ class LogController extends Controller
             if (Auth::user()->isAdmin == 1)
             {
                 $request->session()->regenerate();
-                return redirect()->intended('main')->withSuccess('You are Signed in');;
+                return redirect()->intended('main')->with('status','You are Signed in');;
             }else {
                
                 $request->session()->regenerate();
-                return redirect()->intended('main')->withSuccess('You are Signed in');
+                return redirect()->intended('main')->with('status','You are Signed in');
             }
         }
         $validator['email'] = 'Email address or password is incorrect.';

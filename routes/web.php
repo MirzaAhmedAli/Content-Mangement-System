@@ -23,10 +23,16 @@ Route::get('register', [App\Http\Controllers\RegisterController::class, 'create'
 Route::post('register', [App\Http\Controllers\RegisterController::class, 'store']);
 Route::get('login', [App\Http\Controllers\LogController::class, 'login'])->name('login');
 Route::post('login', [App\Http\Controllers\LogController::class, 'userLogin']);
-Route::get('main', [App\Http\Controllers\MainPageController::class, 'index'])->middleware('auth')->name('main');
-Route::get('about',[App\Http\Controllers\MainPageController::class, 'about'])->middleware('auth')->name('about');
 
-Route::get('logout', [App\Http\Controllers\LogController::class, 'logout'])->middleware('auth')->name('logout');
+
+Route::middleware('auth')->group(function () {
+    Route::get('main', [App\Http\Controllers\MainPageController::class, 'index'])->name('main');
+    Route::get('about',[App\Http\Controllers\MainPageController::class, 'about'])->name('about');
+    Route::resource('users',App\Http\Controllers\UserController::class)->only(['index', 'store', 'edit', 'update']);
+    Route::get('users/{userId}/make-admin', [App\Http\Controllers\UserController::class, 'giveAdmin'])->name('users.giveAdmin');
+    Route::get('logout', [App\Http\Controllers\LogController::class, 'logout'])->name('logout');
+    Route::get('users/{userId}/delete', [App\Http\Controllers\UserController::class, 'destroy']);
+});
 
 Route::middleware('guest')->group(function () {
     Route::get('/forgot-password', [App\Http\Controllers\ForgotPasswordController::class, 'forgotpassword'])->name('password.request');

@@ -12,7 +12,8 @@ class MainPageController extends Controller
     {
         if(Auth::check())
         {
-            return view('pages.main', );
+            $users = User::all();
+            return view('pages.main', ['users' => $users]);
         }
         
         return redirect()->route('login')->withErrors([
