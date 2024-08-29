@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +14,8 @@ class MainPageController extends Controller
         if(Auth::check())
         {
             $users = User::all();
-            return view('pages.main', ['users' => $users]);
+            $categories = Categories::all();
+            return view('pages.main', ['users' => $users, 'categories' => $categories]);
         }
         
         return redirect()->route('login')->withErrors([

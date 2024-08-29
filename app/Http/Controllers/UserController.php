@@ -39,7 +39,7 @@ class UserController extends Controller
              ];
         }
         $user->update($data);
-        return redirect()->route('users.index')->with('status', 'User updated successfully.');;
+        return redirect()->route('users.index')->with('status', 'User updated successfully.');
     }
 
     public function destroy($userId)

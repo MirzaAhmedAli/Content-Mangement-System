@@ -1,12 +1,12 @@
-@extends("layouts.app")
-@section("content")
+@extends('layouts.app')
+@section('content')
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <div class="flex items-center space-x-3 rtl:space-x-reverse">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpdwzl5xFixobB8a2WDwBgKzjNUeFfyiWkVw&s" class="h-8" alt="Flowbite Logo" />
       <a href="{{route('main')}}">
         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">AutoCar</span>
-        </a>
+      </a>      
     </div>
   <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
@@ -44,61 +44,61 @@
         <a href="{{route('about')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
       </li>
       <li>
-        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Categories</a>
+        <a href="{{route('categories.index')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Categories</a>
       </li>
       <li>
         <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Profile</a>
       </li>
       @if (auth()->user()->isAdmin == 1)
-        <li>
-          <a href="{{route('users.index')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Users</a>
-        </li>
-        @endif
+      <li>
+        <a href="{{route('users.index')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Users</a>
+      </li>
+      @endif
     </ul>
   </div>
   </div>
-</nav>   
-<div class="h-screen md:flex">
-<div
-  class="relative overflow-hidden md:flex w-1/2 bg-cover bg-center i justify-around items-center hidden" style="background-image: url('https://cdna.artstation.com/p/assets/images/images/047/326/558/large/ismail-inceoglu-mini-family.jpg?1647336008');">
-</div>
-<div class="flex md:w-1/2 justify-center py-10 items-center bg-white">
-  <form class="bg-white" action="{{route('users.update', $user->id)}}" method="POST">
-    @csrf
-    @method('PUT')
-    <h1 class="text-gray-800 font-bold text-4xl mb-7 text-center">Update User</h1>
-      
-      <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
-          viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
-        </svg>
-        <input class="pl-2 outline-none border-none text-lg" type="text" name="name" value="{{$user->name}}" placeholder="Username" />
-        @error('name') <span class="text-danger text-red-700">{{$message}}</span> @enderror
-    </div>
-        <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
-            viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
-          </svg>
-          <input class="pl-2 outline-none border-none text-lg" type="text" name="email" readonly value="{{$user->email}}" placeholder="Email Address" />
-    </div>
-          <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
-              fill="currentColor">
-              <path fill-rule="evenodd"
-                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                clip-rule="evenodd" />
-            </svg>
-            <input class="pl-2 outline-none border-none text-lg" type="password" name="password" readonly  placeholder="Password" />
-    </div>
-            <button type="submit" class="block w-full bg-orange-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Update</button>
-            <a href="{{route('users.index')}}">
-            <button type="button" class="block w-full bg-orange-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Return</button>
-            </a>
-        </form>
-</div>
-</div>
+</nav>
+
+<section class="relative w-full min-h-screen bg-cover bg-center mt-4 text-teal-600 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700">
+  <h1 class="text-4xl p-4 font-bold tracking-wide font-serif text-cyan-400 text-center">
+      Update Category
+  </h1>  
+  <div class="relative p-5 lg:px-20 flex flex-col md:flex-row items-center justify-center mt-6">
+  
+      <form action="{{url('categories/'.$category->id.'/edit')}}" class="w-full md:w-1/2 border border-red-500 p-6 bg-gray-900" method="POST" enctype="multipart/form-data">
+      @csrf
+      @method('PUT')
+      <h2 class="text-2xl pb-3 font-semibold">
+          Enter Details
+      </h2>
+      <div>
+          <div class="flex flex-col mb-3">
+          <label>Name</label>
+          <input 
+              type="text" name="name" value="{{$category->name}}"
+              class="px-3 py-2 bg-gray-800 border border-gray-900 focus:border-red-500 focus:outline-none focus:bg-gray-800 focus:text-red-500">
+              @error('name') <span class="text-danger text-red-700">{{$message}}</span> @enderror
+            </div>
+          <div class="flex flex-col mb-3">
+          <label>Uplaod Image</label>
+          <input 
+              type="file" name="image" value="{{$category->image}}"
+              class="px-3 py-2 bg-gray-800 border border-gray-900 focus:border-red-500 focus:outline-none focus:bg-gray-800 focus:text-red-500"
+          >
+          @error('image') <span class="text-danger text-red-700">{{$message}}</span> @enderror
+        </div>
+          <div class="flex flex-col mb-3">
+          <label>Description</label>
+          <input type="text" value="{{$category->description}}" class="px-3 py-2 bg-gray-800 border border-gray-900 focus:border-red-500 focus:outline-none focus:bg-gray-800 focus:text-red-500" name="description"> 
+          @error('description') <span class="text-danger text-red-700">{{$message}}</span> @enderror
+        </div>
+      </div>
+      <div class="w-full pt-3">
+          <button type="submit" class="w-full bg-gray-900 border rounded-lg px-4 py-2 transition duration-50 focus:outline-none font-semibold hover:bg-red-500 hover:text-white text-xl cursor-pointer">
+          Update
+          </button>
+      </div>
+      </form>
+  </div>
+  </section>
 @endsection

@@ -44,8 +44,13 @@
         <li>
           <a href="{{route('about')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
         </li>
+        {{-- <li>
+        @foreach ($categories as $category)
+        <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page"></a>
+        @endforeach
+      </li> --}}
         <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Categories</a>
+          <a href="{{route('categories.index')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Categories</a>
         </li>
         <li>
           <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Profile</a>
@@ -262,22 +267,13 @@
               <div class="px-8 mt-10">
                   <h1 class="mb-4 text-xl font-bold text-white">Categories</h1>
                   <div class="flex flex-col max-w-sm px-4 py-6 mx-auto bg-white rounded-lg shadow-md">
+                    @foreach ($categories as $category) 
                       <ul>
-                          <li><a href="#" class="mx-1 font-bold text-gray-700 hover:text-gray-600 hover:underline">-
-                                  Sports</a></li>
-                          <li class="mt-2"><a href="#"
-                                  class="mx-1 font-bold text-gray-700 hover:text-gray-600 hover:underline">-
-                                  Off-Road</a></li>
-                          <li class="mt-2"><a href="#"
-                                  class="mx-1 font-bold text-gray-700 hover:text-gray-600 hover:underline">- Luxury</a>
-                          </li>
-                          <li class="mt-2"><a href="#"
-                                  class="mx-1 font-bold text-gray-700 hover:text-gray-600 hover:underline">-
-                                  Bikes</a></li>
-                          <li class="flex items-center mt-2"><a href="#"
-                                  class="mx-1 font-bold text-gray-700 hover:text-gray-600 hover:underline">-
-                                  Daily Driver</a></li>
+                          <li>-<a href="{{url('categories/'.$category->id.'/show')}}" class="mx-1 mt-6 font-bold text-gray-700 hover:text-gray-600 hover:underline">
+                            {{$category->name}}
+                        </a></li>
                       </ul>
+                    @endforeach  
                   </div>
               </div>
               <div class="px-8 mt-10">
