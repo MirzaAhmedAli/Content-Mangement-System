@@ -25,4 +25,8 @@ class Categories extends Model
     public function subcategories(){
         return $this->hasMany(SubCategories::class, 'category_id');
     }
+
+    public function posts(){
+        return $this->hasMany(Post::class, 'category_id');
+    }
 }

@@ -1,17 +1,17 @@
 @extends('layouts.app')
 @section('content')
-<nav class="bg-white border-gray-200 dark:bg-gray-900 ">
+<section class="bg-white dark:bg-gray-900 bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg');">
+<nav class=" border-gray-200 shadow-lg">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <div class="flex items-center space-x-3 rtl:space-x-reverse">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpdwzl5xFixobB8a2WDwBgKzjNUeFfyiWkVw&s" class="h-8" alt="Flowbite Logo" />
       <a href="{{route('main')}}">
-      <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">AutoCar</span>
+      <span class="self-center text-2xl font-semibold whitespace-nowrap text-yellow-700">AutoCar</span>
       </a>
     </div>
   <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
         <span class="sr-only">Open user menu</span>
-        <img class="w-8 h-8 rounded-full" src="https://cdn-icons-png.flaticon.com/512/4042/4042356.png" alt="user photo">
+        <img class="w-8 h-8 rounded-full" src="{{asset(auth()->user()->image)}}" alt="user photo">
       </button>
       <!-- Dropdown menu -->
       <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
@@ -21,7 +21,7 @@
         </div>
         <ul class="py-2" aria-labelledby="user-menu-button">
           <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
+            <a href="{{url('users/'.auth()->user()->id.'/profile')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
           </li>
           <li>
             <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
@@ -36,44 +36,28 @@
     </button>
   </div>
   <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
-    <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+    <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
       <li>
-        <a href="{{url('/')}}" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
+        <a href="{{url('/')}}" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-yellow-500 md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
       </li>
       <li>
         <a href="{{route('about')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
       </li>
       <li>
-        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Profile</a>
+        <a href="{{url('users/'.auth()->user()->id.'/profile')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Profile</a>
       </li>
       @if (auth()->user()->isAdmin == 1)
         <li>
           <a href="{{route('users.index')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Users</a>
         </li>
-        @endif
+      @endif
     </ul>
   </div>
   </div>
 </nav>
-  <!-- component -->
-<section class="bg-white dark:bg-gray-900 bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg');">
    
   <div class="container px-6 py-10 mx-auto">
       <h1 class="text-3xl font-semibold text-amber-200 capitalize lg:text-4xl dark:text-white font-serif ">Categories</h1>
-      @if (auth()->user()->isAdmin == 1)
-      <div class="mt-5">
-        <a href="{{route('create.category')}}">
-          <button type="button" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Add Category</button>
-        </a>
-        <a href="{{route('create.subcategory')}}">
-          <button type="button" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Add SubCategory</button>
-        </a>
-        <a href="{{route('subcategory.index')}}">
-          <button type="button" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Show All Categories</button>
-        </a>
-      </div>
-      @endif
-
       @if (session('status'))
       <div class="px-4 sm:px-6 lg:px-8 mt-6 mr-20">
           <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -85,12 +69,16 @@
           </div>     
       </div>   
       @endif
+      @if (auth()->user()->isAdmin == 1)
+      <a href="{{route('subcategory.index')}}">
+        <button type="button" class="mt-5 text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Show All Categories</button>
+      </a>
+      @endif
       <div class="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2 justify-center">
         @foreach ($categories as $category)
         @php $unique_id = $loop->index; @endphp 
         <div class="lg:flex shadow-lg">
             <img class="object-cover w-full h-56  bg-cover rounded-lg lg:w-64" src="{{asset($category->image)}}" alt="">
-
             <div class="flex flex-col justify-between py-6 lg:mx-6">
                 <a href="{{url('categories/'.$category->id.'/show')}}" class="text-xl font-semibold text-black hover:underline dark:text-white ">
                     {{$category->name}}

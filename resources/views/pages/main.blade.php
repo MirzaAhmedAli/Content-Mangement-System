@@ -1,18 +1,19 @@
 @extends('layouts.app')
 @section('content')
 <div class="overflow-x-hidden bg-gray-100">
-  <nav class="bg-white border-gray-200 dark:bg-gray-900">
+  <div class="px-6 py-8 bg-cover bg-center" style="background-image: url('https://wallpapercave.com/wp/wp4489040.jpg');">
+  <nav class=" border-gray-200 shadow-lg">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <div class="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpdwzl5xFixobB8a2WDwBgKzjNUeFfyiWkVw&s" class="h-8" alt="Flowbite Logo" />
         <a href="{{route('main')}}">
-          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">AutoCar</span>
+          <span class="self-center text-2xl font-semibold whitespace-nowrap font-serif dark:text-white">AutoCar</span>
         </a>      
       </div>
     <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
         <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
           <span class="sr-only">Open user menu</span>
-          <img class="w-8 h-8 rounded-full" src="https://cdn-icons-png.flaticon.com/512/4042/4042356.png" alt="user photo">
+          <img class="w-8 h-8 rounded-full" src="{{asset(auth()->user()->image)}}" alt="user photo">
         </button>
         <!-- Dropdown menu -->
         <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
@@ -22,7 +23,7 @@
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
             <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
+              <a href="{{url('users/'.auth()->user()->id.'/profile')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
             </li>
             <li>
               <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
@@ -37,23 +38,18 @@
       </button>
     </div>
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
-      <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+      <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border  rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         <li>
-          <a href="{{url('/')}}" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
+          <a href="{{url('/')}}" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-yellow-500 md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
         </li>
         <li>
           <a href="{{route('about')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
         </li>
-        {{-- <li>
-        @foreach ($categories as $category)
-        <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page"></a>
-        @endforeach
-      </li> --}}
         <li>
           <a href="{{route('categories.index')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Categories</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Profile</a>
+          <a href="{{url('users/'.auth()->user()->id.'/profile')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Profile</a>
         </li>
         @if (auth()->user()->isAdmin == 1)
         <li>
@@ -65,9 +61,8 @@
     </div>
   </nav>
   
-  <div class="px-6 py-8 bg-cover bg-center" style="background-image: url('https://i.pinimg.com/originals/2b/de/7d/2bde7d14133968f97d6c4dd898edb989.gif ');">
     @if (session('status'))
-    <div class="px-4 sm:px-6 lg:px-8 mt-6 mr-20">
+    <div class="px-4 sm:px-6 lg:px-8 mt-6 mb-5 mr-20">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 overflow-hidden shadow-sm sm:rounded-lg font-mono text-lg">
             <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -76,11 +71,11 @@
         </div>        
         </div>     
     </div>   
-    @endif  
+    @endif 
+
     <div class="container flex justify-between mx-auto">
           <div class="w-full lg:w-8/12">
               <div class="flex items-center justify-between">
-                  <h1 class="text-xl font-bold text-orange-600 md:text-4xl">Posts</h1>
                   {{-- <div>
                       <select class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                           <option>Latest</option>
@@ -88,195 +83,96 @@
                       </select>
                   </div> --}}
               </div>
-              <div class="mt-6">
-                  <div class="max-w-4xl px-10 py-6 mx-auto text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800   rounded-lg shadow-md">
-                      <div class="flex items-center justify-between"><span class="font-light text-black">Jun 1,    
-                              2020</span><a href="#"></a>
-                              <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 rounded-lg  focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
+
+              
+            <h1 class="text-xl font-bold text-orange-600 md:text-4xl mt-3">Posts</h1>
+            <a href="{{route('posts.create')}}"><button type="button" class="mt-4 text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Create Post</button>
+            </a>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+              @foreach ($posts as $post)
+              @php $unique_id = $loop->index; @endphp
+                <!-- Post 1 -->
+                <div class="rounded-lg overflow-hidden shadow-md">
+                    <img class="w-full h-56 object-cover" src="{{asset($post->image)}}" alt="Post Image">
+                    <div class="p-6 bg-gradient-to-br from-green-400 to-blue-600 text-white">
+                        <div class="flex items-center justify-between">
+                            <span class="font-medium text-black">{{$post->created_at->format('j M Y')}}</span>
+                            @if ($post->user->is(auth()->user()) || auth()->user()->isAdmin == 1)
+                            <button id="dropdownMenuIconButton{{$unique_id}}" data-dropdown-toggle="dropdownDots{{$unique_id}}" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 rounded-lg  focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
                                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
-                                <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
+                                    <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
                                 </svg>
-                                </button>
-                                
-                                <!-- Dropdown menu -->
-                                <div id="dropdownDots" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                    <ul class="py-2 text-sm  dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
-                                      <li>
-                                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                      </li>
-                                      <li>
-                                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-red-500 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
-                                      </li>
-                                    </ul>
-                                </div>
-                      </div>
-                      <div class="mt-2"><a href="#" class="text-2xl font-bold text-white hover:underline">Build
-                              Your New Idea with Laravel Freamwork.</a>
-                          <p class="mt-2 text-white">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                              Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim
-                              reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!</p>
-                      </div>
-                      <div class="flex items-center justify-between mt-4"><a href="#"
-                        class="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500">Laravel</a>
-                          <div><a href="#" class="flex items-center"><img
-                                      src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80"
-                                      alt="avatar" class="hidden object-cover w-10 h-10 mx-4 rounded-full sm:block">
-                                  <h1 class="font-bold text-indigo-400 hover:underline">Alex John</h1>
-                              </a></div>
-                      </div>
-                  </div>
-              </div>
-              <div class="mt-6">
-                  <div class="max-w-4xl px-10 py-6 mx-auto text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 rounded-lg shadow-md">
-                      <div class="flex items-center justify-between"><span class="font-light text-black">Mar 4,2019</span><a href="#"></a>
-                              <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 rounded-lg  focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
-                                <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
-                                </svg>
-                                </button> 
-                                
-                                <!-- Dropdown menu -->
-                                <div id="dropdownDots" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                    <ul class="py-2 text-sm  dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
-                                      <li>
-                                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                      </li>
-                                      <li>
-                                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-red-500 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
-                                      </li>
-                                    </ul>
-                                </div>
-                      </div>
-                      <div class="mt-2"><a href="#"
-                              class="text-2xl font-bold text-white hover:underline">Accessibility tools for
-                              designers and developers</a>
-                          <p class="mt-2 text-white">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                              Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim
-                              reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!</p>
-                      </div>
-                      <div class="flex items-center justify-between mt-4"><a href="#"
-                        class="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500">Design</a>
-                          <div><a href="#" class="flex items-center"><img
-                                      src="https://images.unsplash.com/photo-1464863979621-258859e62245?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=333&amp;q=80"
-                                      alt="avatar" class="hidden object-cover w-10 h-10 mx-4 rounded-full sm:block">
-                                  <h1 class="font-bold text-indigo-400 hover:underline">Jane Doe</h1>
-                              </a></div>
-                      </div>
-                  </div>
-              </div>
-              <div class="mt-6">
-                  <div class="max-w-4xl px-10 py-6 mx-auto text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 rounded-lg shadow-md">
-                      <div class="flex items-center justify-between"><span class="font-light text-black">Feb 14,2019</span><a href="#"></a>
-                              <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 rounded-lg  focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
-                                <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
-                                </svg>
-                                </button>
-                                
-                                <!-- Dropdown menu -->
-                                <div id="dropdownDots" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                    <ul class="py-2 text-sm  dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
-                                      <li>
-                                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                      </li>
-                                      <li>
-                                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-red-500 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
-                                      </li>
-                                    </ul>
-                                </div>
-                      </div>
-                      <div class="mt-2"><a href="#" class="text-2xl font-bold text-white hover:underline">PHP:
-                              Array to Map</a>
-                          <p class="mt-2 text-white">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                              Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim
-                              reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!</p>
-                      </div>
-                      <div class="flex items-center justify-between mt-4"><a href="#"
-                        class="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500">PHP</a>
-                          <div><a href="#" class="flex items-center"><img
-                                      src="https://images.unsplash.com/photo-1531251445707-1f000e1e87d0?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=281&amp;q=80"
-                                      alt="avatar" class="hidden object-cover w-10 h-10 mx-4 rounded-full sm:block">
-                                  <h1 class="font-bold text-indigo-400 hover:underline">Lisa Way</h1>
-                              </a></div>
-                      </div>
-                  </div>
-              </div>
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div id="dropdownDots{{$unique_id}}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                <ul class="py-2 text-sm  dark:text-gray-200" aria-labelledby="dropdownMenuIconButton{{$unique_id}}">
+                                    <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a></li>
+                                    <li><a href="{{url('posts/'.$post->id.'/delete')}}" class="block px-4 py-2 text-gray-700 hover:bg-red-500 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a></li>
+                                </ul>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="mt-2">
+                            <a href="#" class="text-2xl font-bold text-white hover:underline">{{$post->title}}</a>
+                            <p class="mt-2 text-white">{{$post->description}}</p>
+                        </div>
+                        <div class="flex items-center justify-between mt-4">
+                            <a href="{{url('categories/'.$post->category->id.'/show')}}" class="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500">{{$post->category->name}}</a>
+                            <div>
+                                <a href="" class="flex items-center">
+                                    <img src="{{asset($post->user->image)}}" class="object-cover w-10 h-10 mx-4 rounded-full">
+                                    <h1 class="font-bold text-indigo-400 hover:underline">{{$post->user->name}}</h1>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                
+            </div>
               <div class="mt-8">
                   <div class="flex">
-                      <a href="#" class="px-3 py-2 mx-1 font-medium text-gray-500 bg-white rounded-md cursor-not-allowed">
-                          previous
-                      </a>
-                  
-                      <a href="#" class="px-3 py-2 mx-1 font-medium text-gray-700 bg-white rounded-md hover:bg-blue-500 hover:text-white">
-                          1
-                      </a>
-                  
-                      <a href="#" class="px-3 py-2 mx-1 font-medium text-gray-700 bg-white rounded-md hover:bg-blue-500 hover:text-white">
-                          2
-                      </a>
-                  
-                      <a href="#" class="px-3 py-2 mx-1 font-medium text-gray-700 bg-white rounded-md hover:bg-blue-500 hover:text-white">
-                          3
-                      </a>
-                  
-                      <a href="#" class="px-3 py-2 mx-1 font-medium text-gray-700 bg-white rounded-md hover:bg-blue-500 hover:text-white">
-                          Next
-                      </a>
+                    {{$posts->links()}}
                   </div>
               </div>
           </div>
-          <div class="hidden w-4/12 -mx-8 lg:block">
-              <div class="px-8">
-                  <h1 class="mb-4 text-xl font-bold text-violet-400">Authors</h1>
-                  <div class="flex flex-col max-w-sm px-6 py-4 mx-auto bg-white rounded-lg shadow-md">
-                      <ul class="-mx-4">
-                          <li class="flex items-center"><img
-                                  src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80"
-                                  alt="avatar" class="object-cover w-10 h-10 mx-4 rounded-full">
-                              <p><a href="#" class="mx-1 font-bold text-gray-700 hover:underline">Alex John</a><span
-                                      class="text-sm font-light text-gray-700">Created 23 Posts</span></p>
-                          </li>
-                          <li class="flex items-center mt-6"><img
-                                  src="https://images.unsplash.com/photo-1464863979621-258859e62245?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=333&amp;q=80"
-                                  alt="avatar" class="object-cover w-10 h-10 mx-4 rounded-full">
-                              <p><a href="#" class="mx-1 font-bold text-gray-700 hover:underline">Jane Doe</a><span
-                                      class="text-sm font-light text-gray-700">Created 52 Posts</span></p>
-                          </li>
-                          <li class="flex items-center mt-6"><img
-                                  src="https://images.unsplash.com/photo-1531251445707-1f000e1e87d0?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=281&amp;q=80"
-                                  alt="avatar" class="object-cover w-10 h-10 mx-4 rounded-full">
-                              <p><a href="#" class="mx-1 font-bold text-gray-700 hover:underline">Lisa Way</a><span
-                                      class="text-sm font-light text-gray-700">Created 73 Posts</span></p>
-                          </li>
-                          <li class="flex items-center mt-6"><img
-                                  src="https://images.unsplash.com/photo-1500757810556-5d600d9b737d?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=735&amp;q=80"
-                                  alt="avatar" class="object-cover w-10 h-10 mx-4 rounded-full">
-                              <p><a href="#" class="mx-1 font-bold text-gray-700 hover:underline">Steve Matt</a><span
-                                      class="text-sm font-light text-gray-700">Created 245 Posts</span></p>
-                          </li>
-                          <li class="flex items-center mt-6"><img
-                                  src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=373&amp;q=80"
-                                  alt="avatar" class="object-cover w-10 h-10 mx-4 rounded-full">
-                              <p><a href="#" class="mx-1 font-bold text-gray-700 hover:underline">Khatab
-                                      Wedaa</a><span class="text-sm font-light text-gray-700">Created 332 Posts</span>
-                              </p>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
+            <div class="hidden w-4/12 -mx-8 lg:block mt-10">
+                  <div class="px-8">
+                    <h1 class="mb-4 text-xl font-bold text-orange-200">Authors</h1>
+                    <div class="flex flex-col max-w-sm px-6 py-4 mx-auto bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 rounded-lg shadow-md">
+                        <ul class="-mx-4">
+                            @foreach ($users as $user)
+                                <li class="flex items-center mt-4">
+                                    <img
+                                        src="{{asset($user->image)}}"
+                                        alt="avatar"
+                                        class="object-cover w-10 h-10 mx-4 rounded-full">
+                                    <p>
+                                        <a href="" class="mx-1 font-bold text-gray-700 hover:underline">
+                                            {{ $user->name }}
+                                        </a>
+                                        <span class="text-sm font-light text-gray-700 text-right">
+                                            {{ $user->created_at->format('j M Y') }}
+                                        </span>
+                                    </p>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
               <div class="px-8 mt-10">
-                  <h1 class="mb-4 text-xl font-bold text-white">Categories</h1>
-                  <div class="flex flex-col max-w-sm px-4 py-6 mx-auto bg-white rounded-lg shadow-md">
+                  <h1 class="mb-4 text-xl font-bold text-orange-200">Categories</h1>
+                  <div class="flex flex-col max-w-sm px-4 py-3 mx-auto bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg shadow-md">
                     @foreach ($categories as $category) 
                       <ul>
-                          <li>-<a href="{{url('categories/'.$category->id.'/show')}}" class="mx-1 mt-6 font-bold text-gray-700 hover:text-gray-600 hover:underline">
+                          <li class="mt-2">-<a href="{{url('categories/'.$category->id.'/show')}}" class="mx-1 mt-6 font-bold text-gray-700 hover:text-gray-600 hover:underline">
                             {{$category->name}}
                         </a></li>
                       </ul>
                     @endforeach  
                   </div>
               </div>
-              <div class="px-8 mt-10">
+              {{-- <div class="px-8 mt-10">
                   <h1 class="mb-4 text-xl font-bold text-white">Recent Post</h1>
                   <div class="flex flex-col max-w-sm px-8 py-6 mx-auto bg-white rounded-lg shadow-md">
                       <div class="flex items-center justify-center"><a href="#"
@@ -292,7 +188,7 @@
                               class="text-sm font-light text-gray-600">Jun 1, 2020</span>
                       </div>
                   </div>
-              </div>
+              </div> --}}
           </div>
       </div>
   </div>

@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         if (Auth::user()->isAdmin == 1)
             {
-                $users = User::all();
+                $users = User::withCount('posts')->paginate(8);
                 return view('pages.user', ['users' => $users]);
             }else {   
                 return redirect()->intended('main');
@@ -26,12 +26,37 @@ class UserController extends Controller
         return view('pages.user-edit',['user' => $user]);
     }
 
+    public function show($userId, User $user){
+        $authUser = auth()->user();
+        $user = User::withCount('posts')->find($userId);
+        return view('pages.profile', ['user' => $user]);
+    }
+
     public function update(UserRequest $request, User $user)
     {
+        $defaultImagePath = 'uploads/pfps/default.webp';
+        $filemname = null;
+        $path = null;
+
+        if($request->has('image')){
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filemname = time().'.'.$extension;
+            $path = 'uploads/pfps/';
+            $file->move($path,$filemname);
+        }else {
+            $filemname = basename($defaultImagePath);
+            $path = dirname($defaultImagePath) . '/';
+        }
 
         $data = [
             'name' => $request->name,
             'email' => $request->email,
+            'bio' => $request->bio,
+            'city' => $request->city,
+            'country' => $request->country,
+            'work' => $request->work,
+            'image' => $path.$filemname
         ];
 
         if(!empty($request->password)){

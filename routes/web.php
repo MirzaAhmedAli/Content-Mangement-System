@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::get('main', [App\Http\Controllers\MainPageController::class, 'index'])->name('main');
     Route::get('about',[App\Http\Controllers\MainPageController::class, 'about'])->name('about');
     Route::resource('users',App\Http\Controllers\UserController::class)->only(['index', 'store', 'edit', 'update']);
+    Route::get('users/{userId}/profile', [App\Http\Controllers\UserController::class, 'show'])->name('users.profile');
     Route::get('users/{userId}/make-admin', [App\Http\Controllers\UserController::class, 'giveAdmin'])->name('users.giveAdmin');
     Route::get('logout', [App\Http\Controllers\LogController::class, 'logout'])->name('logout');
     Route::get('users/{userId}/delete', [App\Http\Controllers\UserController::class, 'destroy']);
@@ -34,8 +35,12 @@ Route::middleware('auth')->group(function () {
     Route::get('subcategories/{subcategoryId}/delete', [App\Http\Controllers\SubCategoriesController::class, 'destroy'])->name('subcategories.destroy');
     Route::put('subcategories/{subcategoryId}/edit', [App\Http\Controllers\SubCategoriesController::class, 'edit'])->name('subcategories.edit');
     Route::get('subcategories/{subcategoryId}/edit', [App\Http\Controllers\SubCategoriesController::class, 'update']);
-
+    Route::get('posts', [App\Http\Controllers\PostController::class, 'create'])->name('posts.create')->middleware('verified');
+    Route::post('posts', [App\Http\Controllers\PostController::class, 'store'])->name('posts.store')->middleware('verified');
+    Route::put('posts/{postId}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit')->middleware('verified');
+    Route::get('posts/{postId}/delete', [App\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');
 });
+
 
 Route::middleware('guest')->group(function () {
     Route::get('/forgot-password', [App\Http\Controllers\ForgotPasswordController::class, 'forgotpassword'])->name('password.request');
