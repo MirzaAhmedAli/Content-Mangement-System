@@ -61,13 +61,12 @@
 
 <section class="relative w-full min-h-screen bg-cover bg-center mt-4 text-teal-600 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700">
   <h1 class="text-4xl p-4 font-bold tracking-wide font-serif text-cyan-400 text-center">
-      Update SubCategory
+      Create Tag
   </h1>  
   <div class="relative p-5 lg:px-20 flex flex-col md:flex-row items-center justify-center mt-6">
   
-      <form action="{{url('subcategories/'.$subcategory->id.'/edit')}}" class="w-full md:w-1/2 border border-red-500 p-6 bg-gray-900" method="POST" enctype="multipart/form-data">
+      <form action="{{route('tags.index')}}" class="w-full md:w-1/2 border border-red-500 p-6 bg-gray-900" method="POST">
       @csrf
-      @method('PUT')
       <h2 class="text-2xl pb-3 font-semibold">
           Enter Details
       </h2>
@@ -75,29 +74,14 @@
           <div class="flex flex-col mb-3">
           <label>Name</label>
           <input 
-              type="text" name="name" value="{{$subcategory->name}}"
+              type="text" name="name" 
               class="px-3 py-2 bg-gray-800 border border-gray-900 focus:border-red-500 focus:outline-none focus:bg-gray-800 focus:text-red-500">
               @error('name') <span class="text-danger text-red-700">{{$message}}</span> @enderror
             </div>
-          <div class="flex flex-col mb-3">
-          <label>Description</label>
-          <input type="text" value="{{$subcategory->description}}" class="px-3 py-2 bg-gray-800 border border-gray-900 focus:border-red-500 focus:outline-none focus:bg-gray-800 focus:text-red-500" name="description"> 
-          @error('description') <span class="text-danger text-red-700">{{$message}}</span> @enderror
-          </div>
-          <div class="flex flex-col mb-3">
-            <label for="category" class="block mb-2 text-sm font-medium text-teal-600 dark:text-white">Add Category</label>
-            <select name="category_id" class="bg-gray-800 border border-gray-900 focus:border-red-500 focus:outline-none focus:bg-gray-800 text-white text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                <option selected="">Select category</option>
-                @foreach ($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-            @error('category_id') <span class="text-danger text-red-700">{{$message}}</span> @enderror
-          </div>
       </div>
       <div class="w-full pt-3">
-          <button type="submit" class="w-full bg-gray-900 border rounded-lg px-4 py-2 transition duration-50 focus:outline-none font-semibold hover:bg-red-500 hover:text-white text-xl cursor-pointer">
-          Update
+          <button type="submit" class="w-full bg-gray-900 border border-red-500 px-4 py-2 transition duration-50 focus:outline-none font-semibold hover:bg-red-500 hover:text-white text-xl cursor-pointer">
+          Create
           </button>
       </div>
       </form>

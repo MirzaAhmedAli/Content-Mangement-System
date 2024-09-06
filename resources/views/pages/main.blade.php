@@ -94,7 +94,7 @@
                 <!-- Post 1 -->
                 <div class="rounded-lg overflow-hidden shadow-md">
                     <img class="w-full h-56 object-cover" src="{{asset($post->image)}}" alt="Post Image">
-                    <div class="p-6 bg-gradient-to-br from-green-400 to-blue-600 text-white">
+                    <div class="p-6 text-sky-950">
                         <div class="flex items-center justify-between">
                             <span class="font-medium text-black">{{$post->created_at->format('j M Y')}}</span>
                             @if ($post->user->is(auth()->user()) || auth()->user()->isAdmin == 1)
@@ -106,29 +106,42 @@
                             <!-- Dropdown menu -->
                             <div id="dropdownDots{{$unique_id}}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                                 <ul class="py-2 text-sm  dark:text-gray-200" aria-labelledby="dropdownMenuIconButton{{$unique_id}}">
-                                    <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a></li>
+                                    <li><a href="{{url('posts/'.$post->id.'/edit')}}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a></li>
                                     <li><a href="{{url('posts/'.$post->id.'/delete')}}" class="block px-4 py-2 text-gray-700 hover:bg-red-500 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a></li>
                                 </ul>
                             </div>
                             @endif
                         </div>
                         <div class="mt-2">
-                            <a href="#" class="text-2xl font-bold text-white hover:underline">{{$post->title}}</a>
-                            <p class="mt-2 text-white">{{$post->description}}</p>
+                            <a href="#" class="text-2xl font-bold text-sky-950 hover:underline">{{$post->title}}</a>
+                            <p class="mt-2 text-sky-950">{{$post->description}}</p>
                         </div>
                         <div class="flex items-center justify-between mt-4">
                             <a href="{{url('categories/'.$post->category->id.'/show')}}" class="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500">{{$post->category->name}}</a>
+                            @foreach ($post->tags as $tag)
+                            <span class="text-indigo-600 font-bold text-left">#{{$tag->name}}</span>
+                            @endforeach                            
                             <div>
-                                <a href="" class="flex items-center">
+                                <a href="{{route('users.profile', ['userId' => $post->user->id])}}" class="flex items-center">
                                     <img src="{{asset($post->user->image)}}" class="object-cover w-10 h-10 mx-4 rounded-full">
-                                    <h1 class="font-bold text-indigo-400 hover:underline">{{$post->user->name}}</h1>
+                                    <h1 class="font-bold text-indigo-500 hover:underline">{{$post->user->name}}</h1>
+                                    @if ($post->user->isAdmin == 1)
+                                    <svg data-popover-target="popover-default" class="w-6 h-6 text-blue-700 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                      <path d="M12.356 3.066a1 1 0 0 0-.712 0l-7 2.666A1 1 0 0 0 4 6.68a17.695 17.695 0 0 0 2.022 7.98 17.405 17.405 0 0 0 5.403 6.158 1 1 0 0 0 1.15 0 17.406 17.406 0 0 0 5.402-6.157A17.694 17.694 0 0 0 20 6.68a1 1 0 0 0-.644-.949l-7-2.666Z"/>
+                                    </svg>
+                                    <div data-popover id="popover-default" role="tooltip" class="absolute z-10 invisible inline-block w-16 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
+                                      <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
+                                          <h3 class="font-semibold text-gray-900 dark:text-white">Admin</h3>
+                                      </div>
+                                      <div data-popper-arrow></div>
+                                  </div>                                      
+                                    @endif
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 @endforeach
-                
             </div>
               <div class="mt-8">
                   <div class="flex">
@@ -137,7 +150,7 @@
               </div>
           </div>
             <div class="hidden w-4/12 -mx-8 lg:block mt-10">
-                  <div class="px-8">
+                <div class="px-8">
                     <h1 class="mb-4 text-xl font-bold text-orange-200">Authors</h1>
                     <div class="flex flex-col max-w-sm px-6 py-4 mx-auto bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 rounded-lg shadow-md">
                         <ul class="-mx-4">
@@ -148,11 +161,11 @@
                                         alt="avatar"
                                         class="object-cover w-10 h-10 mx-4 rounded-full">
                                     <p>
-                                        <a href="" class="mx-1 font-bold text-gray-700 hover:underline">
+                                        <a href="{{route('users.profile', ['userId' => $user->id])}}" class="mx-1 font-bold text-gray-700 hover:underline">
                                             {{ $user->name }}
                                         </a>
                                         <span class="text-sm font-light text-gray-700 text-right">
-                                            {{ $user->created_at->format('j M Y') }}
+                                            {{ $user->posts_count }} posts
                                         </span>
                                     </p>
                                 </li>
@@ -172,23 +185,6 @@
                     @endforeach  
                   </div>
               </div>
-              {{-- <div class="px-8 mt-10">
-                  <h1 class="mb-4 text-xl font-bold text-white">Recent Post</h1>
-                  <div class="flex flex-col max-w-sm px-8 py-6 mx-auto bg-white rounded-lg shadow-md">
-                      <div class="flex items-center justify-center"><a href="#"
-                              class="px-2 py-1 text-sm text-green-100 bg-gray-600 rounded hover:bg-gray-500">Laravel</a>
-                      </div>
-                      <div class="mt-4"><a href="#" class="text-lg font-medium text-gray-700 hover:underline">Build
-                              Your New Idea with Laravel Freamwork.</a></div>
-                      <div class="flex items-center justify-between mt-4">
-                          <div class="flex items-center"><img
-                                  src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80"
-                                  alt="avatar" class="object-cover w-8 h-8 rounded-full"><a href="#"
-                                  class="mx-3 text-sm text-gray-700 hover:underline">Alex John</a></div><span
-                              class="text-sm font-light text-gray-600">Jun 1, 2020</span>
-                      </div>
-                  </div>
-              </div> --}}
           </div>
       </div>
   </div>

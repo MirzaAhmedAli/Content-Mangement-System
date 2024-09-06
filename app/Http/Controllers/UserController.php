@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
@@ -27,9 +28,9 @@ class UserController extends Controller
     }
 
     public function show($userId, User $user){
-        $authUser = auth()->user();
+        $posts = Post::all();
         $user = User::withCount('posts')->find($userId);
-        return view('pages.profile', ['user' => $user]);
+        return view('pages.profile', ['user' => $user, 'posts' => $posts]);
     }
 
     public function update(UserRequest $request, User $user)

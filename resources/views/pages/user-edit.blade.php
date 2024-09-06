@@ -50,7 +50,7 @@
     </div>
     <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
       <i class="fa fa-info text-blueGray-400" aria-hidden="true"></i>
-      <textarea class="pl-2 outline-none border-none text-lg" type="text" name="bio"  value="{{$user->bio}}" placeholder="Bio"></textarea>
+      <textarea class="pl-2 outline-none border-none text-lg" type="text" name="bio"  placeholder="Bio">{{$user->bio}}</textarea>
       @error('bio') <span class="text-danger text-red-700">{{$message}}</span> @enderror
     </div>
       @if ($user->isAdmin == 0)

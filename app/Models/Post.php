@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -36,6 +37,11 @@ class Post extends Model
     public function subcategory()  
     {
     return $this->belongsTo(SubCategories::class);
+    }
+
+    public function tags()  
+    {
+    return $this->belongsToMany(Tag::class);
     }
 
 }

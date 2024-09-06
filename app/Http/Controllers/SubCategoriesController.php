@@ -14,6 +14,18 @@ class SubCategoriesController extends Controller
         $categories = Categories::with('subcategories')->get();
         return view('pages.sub-categories',['categories' => $categories]);
     }
+
+    public function showPosts($subcategoryId)
+    {
+        $subcategory = Subcategories::findOrFail($subcategoryId);
+        $posts = $subcategory->posts; // Assuming the relationship is set up correctly
+
+        return view('pages.subcategory-posts', [
+            'subcategory' => $subcategory,
+            'posts' => $posts
+        ]);
+    }
+
     public function create(){
         if (Auth::user()->isAdmin == 1)
         {
@@ -35,8 +47,9 @@ class SubCategoriesController extends Controller
     }
 
     public function edit(int $id){
+        $categories = Categories::all();
         $subcategory = SubCategories::findorFail($id);
-        return view('pages.functions.edit-sub-category',compact('subcategory'));
+        return view('pages.functions.edit-sub-category',['subcategory' => $subcategory, 'categories' => $categories]);
     }
     public function update(SubCategoryRequest $request, int $id){
 
