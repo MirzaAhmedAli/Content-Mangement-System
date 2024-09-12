@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="overflow-x-hidden bg-gray-100">
-  <div class="px-6 py-8 bg-cover bg-center" style="background-image: url('https://wallpapercave.com/wp/wp4489040.jpg');">
+  <div class="px-6 py-8 bg-cover bg-center" style="background-image: url('https://img.freepik.com/free-vector/winter-blue-pink-gradient-background-vector_53876-117276.jpg?w=1380&t=st=1726124788~exp=1726125388~hmac=9ecff501c4a724506c37b32b7b841398e35beb2f162d822c014fe16068be05d1');">
   <nav class=" border-gray-200 shadow-lg">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <div class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -13,7 +13,7 @@
     <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
         <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
           <span class="sr-only">Open user menu</span>
-          <img class="w-8 h-8 rounded-full" src="{{asset(auth()->user()->image)}}" alt="user photo">
+          <img class="w-8 h-8 rounded-full bg-cover" src="{{asset(auth()->user()->image)}}" alt="user photo">
         </button>
         <!-- Dropdown menu -->
         <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
@@ -86,13 +86,13 @@
 
               
             <h1 class="text-xl font-bold text-orange-600 md:text-4xl mt-3">Posts</h1>
-            <a href="{{route('posts.create')}}"><button type="button" class="mt-4 text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Create Post</button>
+            <a href="{{route('posts.create')}}"><button type="button" class="mt-4 text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 hover:shadow-xl">Create Post</button>
             </a>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
               @foreach ($posts as $post)
               @php $unique_id = $loop->index; @endphp
                 <!-- Post 1 -->
-                <div class="rounded-lg overflow-hidden shadow-md">
+                <div class="rounded-lg overflow-hidden shadow-md hover:shadow-2xl">
                     <img class="w-full h-56 object-cover" src="{{asset($post->image)}}" alt="Post Image">
                     <div class="p-6 text-sky-950">
                         <div class="flex items-center justify-between">
@@ -116,30 +116,30 @@
                             <a href="#" class="text-2xl font-bold text-sky-950 hover:underline">{{$post->title}}</a>
                             <p class="mt-2 text-sky-950">{{$post->description}}</p>
                         </div>
-                        <div class="flex items-center justify-between mt-4">
-                            <a href="{{url('categories/'.$post->category->id.'/show')}}" class="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500">{{$post->category->name}}</a>
-                            @foreach ($post->tags as $tag)
-                            <span class="text-indigo-600 font-bold text-left">#{{$tag->name}}</span>
-                            @endforeach                            
-                            <div>
-                                <a href="{{route('users.profile', ['userId' => $post->user->id])}}" class="flex items-center">
-                                    <img src="{{asset($post->user->image)}}" class="object-cover w-10 h-10 mx-4 rounded-full">
-                                    <h1 class="font-bold text-indigo-500 hover:underline">{{$post->user->name}}</h1>
-                                    @if ($post->user->isAdmin == 1)
-                                    <svg data-popover-target="popover-default" class="w-6 h-6 text-blue-700 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                      <path d="M12.356 3.066a1 1 0 0 0-.712 0l-7 2.666A1 1 0 0 0 4 6.68a17.695 17.695 0 0 0 2.022 7.98 17.405 17.405 0 0 0 5.403 6.158 1 1 0 0 0 1.15 0 17.406 17.406 0 0 0 5.402-6.157A17.694 17.694 0 0 0 20 6.68a1 1 0 0 0-.644-.949l-7-2.666Z"/>
-                                    </svg>
-                                    <div data-popover id="popover-default" role="tooltip" class="absolute z-10 invisible inline-block w-16 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
-                                      <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
-                                          <h3 class="font-semibold text-gray-900 dark:text-white">Admin</h3>
-                                      </div>
-                                      <div data-popper-arrow></div>
-                                  </div>                                      
-                                    @endif
-                                </a>
-                            </div>
-                        </div>
                     </div>
+                    <div class="flex items-center justify-between p-6">
+                      <a href="{{url('categories/'.$post->category->id.'/show')}}" class="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500 shadow-lg hover:shadow-xl">{{$post->category->name}}</a>
+                      @foreach ($post->tags as $tag)
+                      <span class="text-indigo-600 font-bold text-left">#{{$tag->name}}</span>
+                      @endforeach                            
+                      <div>
+                          <a href="{{route('users.profile', ['userId' => $post->user->id])}}" class="flex items-center">
+                              <img src="{{asset($post->user->image)}}" class="object-cover w-10 h-10 mx-4 rounded-full">
+                              <h1 class="font-bold text-indigo-500 hover:underline">{{$post->user->name}}</h1>
+                              @if ($post->user->isAdmin == 1)
+                              <svg data-popover-target="popover-default" class="w-6 h-6 text-blue-700 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.356 3.066a1 1 0 0 0-.712 0l-7 2.666A1 1 0 0 0 4 6.68a17.695 17.695 0 0 0 2.022 7.98 17.405 17.405 0 0 0 5.403 6.158 1 1 0 0 0 1.15 0 17.406 17.406 0 0 0 5.402-6.157A17.694 17.694 0 0 0 20 6.68a1 1 0 0 0-.644-.949l-7-2.666Z"/>
+                              </svg>
+                              <div data-popover id="popover-default" role="tooltip" class="absolute z-10 invisible inline-block w-16 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
+                                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
+                                    <h3 class="font-semibold text-gray-900 dark:text-white">Admin</h3>
+                                </div>
+                                <div data-popper-arrow></div>
+                            </div>                                      
+                              @endif
+                          </a>
+                      </div>
+                  </div>
                 </div>
                 @endforeach
             </div>
@@ -151,8 +151,8 @@
           </div>
             <div class="hidden w-4/12 -mx-8 lg:block mt-10">
                 <div class="px-8">
-                    <h1 class="mb-4 text-xl font-bold text-orange-200">Authors</h1>
-                    <div class="flex flex-col max-w-sm px-6 py-4 mx-auto bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 rounded-lg shadow-md">
+                    <h1 class="mb-4 text-xl font-bold text-orange-500">Authors</h1>
+                    <div class="flex flex-col max-w-sm px-6 py-4 mx-auto  focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 rounded-lg shadow-lg hover:shadow-2xl">
                         <ul class="-mx-4">
                             @foreach ($users as $user)
                                 <li class="flex items-center mt-4">
@@ -174,8 +174,8 @@
                     </div>
                 </div>
               <div class="px-8 mt-10">
-                  <h1 class="mb-4 text-xl font-bold text-orange-200">Categories</h1>
-                  <div class="flex flex-col max-w-sm px-4 py-3 mx-auto bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg shadow-md">
+                  <h1 class="mb-4 text-xl font-bold text-orange-500">Categories</h1>
+                  <div class="flex flex-col max-w-sm px-4 py-3 mx-auto focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg shadow-lg hover:shadow-2xl">
                     @foreach ($categories as $category) 
                       <ul>
                           <li class="mt-2">-<a href="{{url('categories/'.$category->id.'/show')}}" class="mx-1 mt-6 font-bold text-gray-700 hover:text-gray-600 hover:underline">

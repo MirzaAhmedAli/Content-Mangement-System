@@ -17,7 +17,7 @@ class MainPageController extends Controller
         if(Auth::check())
         {
             $tags = Tag::all();
-            $posts = Post::simplePaginate(4);
+            $posts = Post::orderBy('created_at', 'desc')->simplePaginate(4);
             $users = User::withCount('posts')->orderBy('posts_count', 'desc')->take(5)->get();
             $categories = Categories::all();
             $subcategories = SubCategories::all();

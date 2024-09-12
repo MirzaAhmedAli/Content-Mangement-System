@@ -71,13 +71,13 @@
       @endif
       @if (auth()->user()->isAdmin == 1)
       <a href="{{route('subcategory.index')}}">
-        <button type="button" class="mt-5 text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Show All Categories</button>
+        <button type="button" class="mt-5 text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 hover:shadow-2xl">Show All Categories</button>
       </a>
       @endif
       <div class="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2 justify-center">
         @foreach ($categories as $category)
         @php $unique_id = $loop->index; @endphp 
-        <div class="lg:flex shadow-lg">
+        <div class="lg:flex shadow-lg hover:shadow-2xl">
             <img class="object-cover w-full h-56  bg-cover rounded-lg lg:w-64" src="{{asset($category->image)}}" alt="">
             <div class="flex flex-col justify-between py-6 lg:mx-6">
                 <a href="{{url('categories/'.$category->id.'/show')}}" class="text-xl font-semibold text-black hover:underline dark:text-white ">

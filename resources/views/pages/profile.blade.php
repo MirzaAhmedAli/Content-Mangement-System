@@ -78,15 +78,15 @@
                 </div>
             </div>
         </div>
-    <div class="container flex justify-between mx-auto">
+    <div class="container mx-auto">
       <div class="w-full lg:w-8/12">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
           @foreach ($user->posts as $post)
           @php $unique_id = $loop->index; @endphp
             <!-- Post 1 -->
-            <div class="rounded-lg overflow-hidden shadow-md">
+            <div class="rounded-lg overflow-hidden shadow-md hover:shadow-2xl">
                 <img class="w-full h-56 object-cover" src="{{asset($post->image)}}" alt="Post Image">
-                <div class="p-6 bg-gradient-to-br from-green-400 to-blue-600 text-white">
+                <div class="p-6 text-sky-950">
                     <div class="flex items-center justify-between">
                         <span class="font-medium text-black">{{$post->created_at->format('j M Y')}}</span>
                         @if ($post->user->is(auth()->user()) || auth()->user()->isAdmin == 1)
@@ -105,13 +105,13 @@
                         @endif
                     </div>
                     <div class="mt-2">
-                        <a href="#" class="text-2xl font-bold text-white hover:underline">{{$post->title}}</a>
-                        <p class="mt-2 text-white">{{$post->description}}</p>
+                        <a href="#" class="text-2xl font-bold text-sky-950 hover:underline">{{$post->title}}</a>
+                        <p class="mt-2 text-sky-950">{{$post->description}}</p>
                     </div>
                     <div class="flex items-center justify-between mt-4">
                         <a href="{{url('categories/'.$post->category->id.'/show')}}" class="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500">{{$post->category->name}}</a>
                         @foreach ($post->tags as $tag)
-                        <span class="text-gray-700 font-semibold">#{{$tag->name}}</span>
+                        <span class="text-indigo-600 font-semibold">#{{$tag->name}}</span>
                         @endforeach                            
                     </div>
                 </div>

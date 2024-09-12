@@ -71,7 +71,7 @@
         @endforeach
     </ul>
 </div>
-<span class="text-5xl text-center font-semibold whitespace-nowrap text-red-500 ml-6">{{$category->name}}</span>      
+<span class="text-5xl text-center font-semibold whitespace-nowrap font-serif text-amber-200 ml-6">{{$category->name}}</span>      
 <div id="default-styled-tab-content">
   @foreach ($subcategories as $subcategory)
       <div class="hidden p-4 rounded-lg" id="styled-{{$subcategory->id}}" role="tabpanel" aria-labelledby="tab-{{$subcategory->id}}">
@@ -79,7 +79,7 @@
               <div class="w-full lg:w-8/12">
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
                       @foreach ($subcategory->posts as $post)
-                          <div class="rounded-lg overflow-hidden shadow-md">
+                          <div class="rounded-lg overflow-hidden shadow-md hover:shadow-2xl">
                               <img class="w-full h-56 object-cover" src="{{asset($post->image)}}" alt="Post Image">
                               <div class="p-6 text-white">
                                   <div class="flex items-center justify-between">

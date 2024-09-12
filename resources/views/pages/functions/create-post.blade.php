@@ -62,7 +62,7 @@
     <div class="w-full lg:w-8/12">
     <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
   <div class="editor max-w-4xl px-6 py-2 mx-auto w-11/12 flex flex-col text-gray-800 border border-gray-300 rounded-lg p-4 shadow-lg justify-start text-left">
-      <div class="heading text-left font-bold text-3xl m-5 text-yellow-600 font-serif">New Post</div>
+      <div class="heading text-left font-bold text-3xl m-5 text-amber-300 font-serif">New Post</div>
       @csrf
       <input class="title bg-gray-100 border border-gray-300 rounded-lg p-2 mb-4 outline-none" spellcheck="false" placeholder="Title" type="text" name="title">
       @error('title') <span class="text-danger text-red-700 font-bold">{{ $message }}</span> @enderror

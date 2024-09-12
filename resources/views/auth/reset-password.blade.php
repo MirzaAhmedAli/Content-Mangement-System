@@ -2,14 +2,17 @@
 @section("content")
 
 <div class="relative flex justify-center sm:items-center min-h-screen bg-cover bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-  <form class="max-w mx-auto text-3lg" method="POST" action="{{url('reset.password.post')}}">
+  <form class="max-w mx-auto text-3lg" method="POST" action="{{route('reset.password.post')}}">
+    @csrf
+    @method('PUT')
+    <h1 class="font-semibold mb-6 text-gray-500 text-center">Enter your email and your New Password</h1>
     <div class="mb-5 ">
       <label for="email" class="block mb-2  font-medium text-gray-900 dark:text-white">Your email</label>
       <input type="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@email.com" required />
       @error('email') <span class="text-danger text-red-700">{{$message}}</span> @enderror
     </div>
     <div class="mb-5 ">
-      <label for="email" class="block mb-2  font-medium text-gray-900 dark:text-white">Password</label>
+      <label for="email" class="block mb-2  font-medium text-gray-900 dark:text-white">New Password</label>
       <input type="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
       @error('password') <span class="text-danger text-red-700">{{$message}}</span> @enderror
     </div>

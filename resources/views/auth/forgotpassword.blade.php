@@ -14,7 +14,7 @@
 @endif
 
 <div class="relative flex justify-center sm:items-center min-h-screen bg-cover bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-  <form class="max-w mx-auto text-3lg" action="{{route('password.reset')}}">
+  <form class="max-w mx-auto text-3lg" action="{{route('password.reset')}}" method="POST">
     @csrf
     <div class="mb-5 ">
       <h1 class="font-semibold mb-6 text-gray-500 text-center">Forgot your password ? Don't Worry, We'll help you make a new one</h1>
