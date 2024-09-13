@@ -53,6 +53,11 @@
   </div>
   </div>
 </nav>
+
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/2.1.6/css/dataTables.dataTables.min.css">
+@endsection
+
 @if (session('status'))
     <div class="px-4 sm:px-6 lg:px-8 mt-6 mr-20">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -65,14 +70,14 @@
     </div>   
     @endif
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-20 ml-4 mr-4 mb-3">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" id="usertable">
         <thead class="text-xs text-white uppercase bg-gray-800  dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     Name
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Role
+                    Email
                 </th>
                 <th scope="col" class="px-6 py-3 ">
                   Posts
@@ -83,95 +88,72 @@
                 <th scope="col" class="px-6 py-3">
                   Updated At
               </th>
-                <th scope="col" class="px-6 py-3 text-center">
+                <th scope="col" class="px-6 py-3">
                     Action
                 </th>
             </tr>
         </thead>
         <tbody>
-          @foreach ($users as $user)
-          @php $unique_id = $loop->index; @endphp
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 ">
-                <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd"/>
-                  </svg>                  
-                    <div class="ps-3">
-                        <div class="text-base font-semibold">{{$user->name}}</div>
-                        <div class="font-normal text-gray-500">{{$user->email}}</div>
-                    </div>  
-                </th>
-                <td class="px-6 py-4">
-                    @if ($user->isAdmin == 0)
-                        User
-                      @else
-                      <div class="font-bold">Admin</div>
-                    @endif
-                </td>
-                <td class="px-6 py-4 ">
-                  {{ $user->posts_count }}
-                </td>
-                <td class="px-6 py-4 ">
-                    <div class="flex items-center">
-                      {{ $user->created_at->format('j M Y, g:i a') }} 
-                    </div>
-                </td>
-                <td class="px-6 py-4">
-                  <div class="flex items-center">
-                    {{ $user->updated_at->format('j M Y, g:i a') }} 
-                  </div>
-                </td>
-                <td class="px-6 py-4 text-center">
-                    <a href="{{url('users/'.$user->id.'/edit')}}" >
-                      <button data-tooltip-target="tooltip-animation-edit-{{ $unique_id }}" type="button" class="shadow-xl text-white bg-slate-200 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                          <path fill-rule="evenodd" d="M5 8a4 4 0 1 1 7.796 1.263l-2.533 2.534A4 4 0 0 1 5 8Zm4.06 5H7a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h2.172a2.999 2.999 0 0 1-.114-1.588l.674-3.372a3 3 0 0 1 .82-1.533L9.06 13Zm9.032-5a2.907 2.907 0 0 0-2.056.852L9.967 14.92a1 1 0 0 0-.273.51l-.675 3.373a1 1 0 0 0 1.177 1.177l3.372-.675a1 1 0 0 0 .511-.273l6.07-6.07a2.91 2.91 0 0 0-.944-4.742A2.907 2.907 0 0 0 18.092 8Z" clip-rule="evenodd"/>
-                        </svg>
-                        </button>
-                        <div id="tooltip-animation-edit-{{ $unique_id }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                          Edit User
-                          <div class="tooltip-arrow" data-popper-arrow></div>
-                      </div>
-                    </a>
-                    <a href="{{url('users/'.$user->id.'/delete')}}">
-                      <button data-tooltip-target="tooltip-animation-delete-{{ $unique_id }}" type="button" class="text-white bg-slate-200 shadow-xl hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                          <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
-                        </svg>                        
-                      </button>
-                      <div id="tooltip-animation-delete-{{ $unique_id }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                        Delete
-                      <div class="tooltip-arrow" data-popper-arrow></div>
-                      </div>
-                    </a>
-                    @if ($user->isAdmin == 0)
-                    <a href="{{ url('users/'.$user->id.'/make-admin') }}" > 
-                      <button data-tooltip-target="tooltip-animation-make-admin-{{ $unique_id }}"  type="button" class="text-white shadow-xl bg-slate-200 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                          <path fill-rule="evenodd" d="M11.644 3.066a1 1 0 0 1 .712 0l7 2.666A1 1 0 0 1 20 6.68a17.694 17.694 0 0 1-2.023 7.98 17.406 17.406 0 0 1-5.402 6.158 1 1 0 0 1-1.15 0 17.405 17.405 0 0 1-5.403-6.157A17.695 17.695 0 0 1 4 6.68a1 1 0 0 1 .644-.949l7-2.666Zm4.014 7.187a1 1 0 0 0-1.316-1.506l-3.296 2.884-.839-.838a1 1 0 0 0-1.414 1.414l1.5 1.5a1 1 0 0 0 1.366.046l4-3.5Z" clip-rule="evenodd"/>
-                        </svg>                     
-                      </button>
-                      <div id="tooltip-animation-make-admin-{{ $unique_id }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                          Make Admin
-                          <div class="tooltip-arrow" data-popper-arrow></div>
-                      </div> 
-                    </a>
-                    @else
-                      <button data-tooltip-target="tooltip-animation-make-admin-{{ $unique_id }}" type="button" class="text-white shadow-xl bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                          <path fill-rule="evenodd" d="M11.644 3.066a1 1 0 0 1 .712 0l7 2.666A1 1 0 0 1 20 6.68a17.694 17.694 0 0 1-2.023 7.98 17.406 17.406 0 0 1-5.402 6.158 1 1 0 0 1-1.15 0 17.405 17.405 0 0 1-5.403-6.157A17.695 17.695 0 0 1 4 6.68a1 1 0 0 1 .644-.949l7-2.666Zm4.014 7.187a1 1 0 0 0-1.316-1.506l-3.296 2.884-.839-.838a1 1 0 0 0-1.414 1.414l1.5 1.5a1 1 0 0 0 1.366.046l4-3.5Z" clip-rule="evenodd"/>
-                        </svg>                     
-                        </button>
-                        <div id="tooltip-animation-make-admin-{{ $unique_id }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                          Admin
-                          <div class="tooltip-arrow" data-popper-arrow></div>
-                      </div>
-                    @endif
-                </td>
-            </tr>
-            @endforeach
         </tbody>
     </table>
 </div>
-{{$users->links()}}
+@endsection
+@section('javascripts')
+    <script src="//cdn.datatables.net/2.1.6/js/dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#usertable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ route('api.users.data') }}',
+            columns: [
+              { data: 'name'},
+              { data: 'email'},
+              { data: 'posts_count', searchable: false },
+              { data: 'created_at'},
+              { data: 'updated_at'},
+                {
+                    data: 'action', name: 'action', orderable: false, searchable: false,
+                      render: function (data) {
+                        const makeAdminButton = data.is_admin ? `
+                            <button data-tooltip-target="tooltip-animation-make-admin" type="button" class="text-white shadow-xl bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" d="M11.644 3.066a1 1 0 0 1 .712 0l7 2.666A1 1 0 0 1 20 6.68a17.694 17.694 0 0 1-2.023 7.98 17.406 17.406 0 0 1-5.402 6.158 1 1 0 0 1-1.15 0 17.405 17.405 0 0 1-5.403-6.157A17.695 17.695 0 0 1 4 6.68a1 1 0 0 1 .644-.949l7-2.666Zm4.014 7.187a1 1 0 0 0-1.316-1.506l-3.296 2.884-.839-.838a1 1 0 0 0-1.414 1.414l1.5 1.5a1 1 0 0 0 1.366.046l4-3.5Z" clip-rule="evenodd"/>
+                                </svg>                     
+                                Admin
+                            </button>
+                        ` : `
+                            <button data-tooltip-target="tooltip-animation-make-admin" type="button" class="text-white shadow-xl bg-slate-200 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" d="M11.644 3.066a1 1 0 0 1 .712 0l7 2.666A1 1 0 0 1 20 6.68a17.694 17.694 0 0 1-2.023 7.98 17.406 17.406 0 0 1-5.402 6.158 1 1 0 0 1-1.15 0 17.405 17.405 0 0 1-5.403-6.157A17.695 17.695 0 0 1 4 6.68a1 1 0 0 1 .644-.949l7-2.666Zm4.014 7.187a1 1 0 0 0-1.316-1.506l-3.296 2.884-.839-.838a1 1 0 0 0-1.414 1.414l1.5 1.5a1 1 0 0 0 1.366.046l4-3.5Z" clip-rule="evenodd"/>
+                                </svg>                     
+                                Make Admin
+                            </button>
+                        `;
+
+                        return `
+                            <a href="${data.edit_url}" class="edit-button">
+                                <button data-tooltip-target="tooltip-animation-edit" type="button" class="shadow-xl text-white bg-slate-200 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                          <path fill-rule="evenodd" d="M5 8a4 4 0 1 1 7.796 1.263l-2.533 2.534A4 4 0 0 1 5 8Zm4.06 5H7a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h2.172a2.999 2.999 0 0 1-.114-1.588l.674-3.372a3 3 0 0 1 .82-1.533L9.06 13Zm9.032-5a2.907 2.907 0 0 0-2.056.852L9.967 14.92a1 1 0 0 0-.273.51l-.675 3.373a1 1 0 0 0 1.177 1.177l3.372-.675a1 1 0 0 0 .511-.273l6.07-6.07a2.91 2.91 0 0 0-.944-4.742A2.907 2.907 0 0 0 18.092 8Z" clip-rule="evenodd"/>
+                        </svg>
+                                </button>
+                            </a>
+                            <a href="${data.delete_url}" class="delete-button">
+                                <button data-tooltip-target="tooltip-animation-delete" type="button" class="text-white bg-slate-200 shadow-xl hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                          <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
+                        </svg>
+                                </button>
+                            </a>
+                            <a href="${data.make_admin}" class="make-admin-button">
+                                ${makeAdminButton}
+                            </a>
+                        `;
+                    }
+                }
+            ]
+        });
+    });
+</script>
 @endsection

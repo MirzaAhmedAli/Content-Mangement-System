@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('users/{userId}/make-admin', [App\Http\Controllers\Api\UserAPiController::class, 'giveAdmin'])->name('users.giveAdmin');
     Route::get('logout', [App\Http\Controllers\Api\LogApiController::class, 'logout'])->name('logout');
     Route::delete('users/{id}/delete', [App\Http\Controllers\Api\UserApiController::class, 'destroy']);
+    Route::get('user', [App\Http\Controllers\Api\UserApiController::class, 'getUsers'])->name('api.users.data');
 
     //For Categories
 
@@ -43,6 +44,7 @@ use Illuminate\Support\Facades\Route;
     Route::delete('posts/{id}/delete', [App\Http\Controllers\Api\PostApiController::class, 'destroy'])->name('posts.destroy');
 
     // For Tags
+    Route::get('tag', [App\Http\Controllers\Api\TagApiController::class, 'getTags'])->name('api.tags.data');
 
     Route::apiResource('tags',App\Http\Controllers\Api\TagApiController::class);
     Route::delete('tags/{id}/delete', [App\Http\Controllers\Api\TagApiController::class, 'destroy'])->name('tags.destroy');

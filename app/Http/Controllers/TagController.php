@@ -9,16 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class TagController extends Controller
 {
-    public function index(){
-        if (Auth::user()->isAdmin == 1)
-        {
-            $tags = Tag::withCount('posts')->paginate(8);
-            return view('pages.tag',['tags' => $tags]);
-        }else 
-        {   
-        return redirect()->intended('categories');
-        }
-    }
+     public function index(){
+         if (Auth::user()->isAdmin == 1)
+         {
+             $tags = Tag::withCount('posts')->paginate(8);
+             return view('pages.tag',['tags' => $tags]);
+         }else 
+         {   
+         return redirect()->intended('categories');
+         }
+     }
 
     public function create(){
         if (Auth::user()->isAdmin == 1)
