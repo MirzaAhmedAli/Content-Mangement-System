@@ -19,6 +19,7 @@ class AdminSeeder extends Seeder
                 'name' => 'Admin',
                 'email' => 'admin@email.com',
                 'password' => Hash::make('password'),
+                'country' => 'Pakistan',
                 'isAdmin' => 1
             ]);
         }
