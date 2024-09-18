@@ -104,7 +104,7 @@
             ajax: '{{ route('api.tags.data') }}',
             columns: [
                 { data: 'name'},
-                { data: 'posts_count'},
+                { data: 'posts_count', searchable: false},
                 { data: 'created_at'},
                 { data: 'updated_at'},
                 {
