@@ -4,24 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use Illuminate\Http\Request;
-use App\Models\SubCategories;
+use App\Models\SubCategory;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\SubCategoryRequest;
 
 class SubCategoriesController extends Controller
 {
     public function index(){
-        $categories = Categories::with('subcategories')->get();
+        $categories = Categories::with('sub_categories')->get();
         return view('pages.sub-categories',['categories' => $categories]);
     }
 
     public function showPosts($subcategoryId)
     {
-        $subcategory = Subcategories::findOrFail($subcategoryId);
+        $subcategory = SubCategory::findOrFail($subcategoryId);
         $posts = $subcategory->posts; // Assuming the relationship is set up correctly
 
         return view('pages.subcategory-posts', [
-            'subcategory' => $subcategory,
+            'sub_categories' => $subcategory,
             'posts' => $posts
         ]);
     }
@@ -33,11 +33,11 @@ class SubCategoriesController extends Controller
         return view('pages.functions.create-sub-category',['categories' => $categories]);
         }else 
         {   
-        return redirect()->intended('categories');
+        return redirect()->intended('subcategories');
         }
     }
     public function store(SubCategoryRequest $request){
-        SubCategories::create([
+        SubCategory::create([
             'name' => $request->name,
             'description' => $request->description,
             'category_id' => $request->category_id,
@@ -48,23 +48,23 @@ class SubCategoriesController extends Controller
 
     public function edit(int $id){
         $categories = Categories::all();
-        $subcategory = SubCategories::findorFail($id);
+        $subcategory = SubCategory::findorFail($id);
         return view('pages.functions.edit-sub-category',['subcategory' => $subcategory, 'categories' => $categories]);
     }
     public function update(SubCategoryRequest $request, int $id){
 
-        SubCategories::findOrFail($id)->update([
+        SubCategory::findOrFail($id)->update([
             'name' => $request->name,
             'description' => $request->description,
             'category_id' => $request->category_id,
         ]);
 
-        return redirect()->intended('subcategories')->with('status', 'SubCategory Updated successfully.');
+        return redirect()->intended('sub_categories')->with('status', 'SubCategory Updated successfully.');
     } 
 
     public function destroy($subcategoryId){
-        $subcategory = SubCategories::findOrFail($subcategoryId);
+        $subcategory = SubCategory::findOrFail($subcategoryId);
         $subcategory->delete();
-        return redirect('subcategories/')->with('status','Category Deleted');
+        return redirect('sub_categories/')->with('status','Category Deleted');
     }
 }

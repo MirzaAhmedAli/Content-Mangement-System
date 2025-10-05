@@ -61,7 +61,7 @@
 
   <div class="mb-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-center">
     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-styled-tab" data-tabs-toggle="#default-styled-tab-content" role="tablist">
-        @foreach ($subcategories as $subcategory)
+        @foreach ($sub_categories as $subcategory)
             <li class="me-2" role="presentation">
                 <button
                     class="inline-block p-4 border-b-2 rounded-t-lg text-white hover:text-slate-400 hover:border-purple-600 dark:text-gray-400 dark:hover:text-purple-500 dark:hover:border-purple-500"id="tab-{{$subcategory->id}}" data-tabs-target="#styled-{{$subcategory->id}}" type="button" role="tab" aria-controls="profile" aria-selected="false" onclick="activateTab(event)">

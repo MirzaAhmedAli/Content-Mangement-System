@@ -11,7 +11,7 @@
 	<div class="flex md:w-1/2 justify-center py-10 items-center bg-white">
 		<form class="bg-white" action="{{url('register')}}" method="POST">
       @csrf
-			<h1 class="text-gray-800 font-bold text-4xl mb-7">Hello fellow Petrolhead</h1>
+			<h1 class="text-gray-800 font-bold text-4xl mb-7">Hello, fellow Petrolhead</h1>
         
 			<div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
 					<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
@@ -32,10 +32,8 @@
             @error('email') <span class="text-danger text-red-700">{{$message}}</span> @enderror
       </div>
 			<div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
-				<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
-					viewBox="0 0 24 24" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-						d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-gray-400 font-bold">
+  				<path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5" />
 				</svg>
 				<input class="pl-2 outline-none border-none text-lg" type="text" name="country"  placeholder="Country" />
 				@error('country') <span class="text-danger text-red-700">{{$message}}</span> @enderror

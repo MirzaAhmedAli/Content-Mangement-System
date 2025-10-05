@@ -16,8 +16,8 @@ class CategoriesController extends Controller
 
     public function show($categoryId, Categories $categories){
         $category = Categories::findOrFail($categoryId);
-        $subcategories = $category->subcategories;  
-        return view('pages.category-show', ['category' => $category, 'subcategories' => $subcategories]);
+        $sub_categories = $category->subcategories;  
+        return view('pages.category-show', ['category' => $category, 'sub_categories' => $sub_categories]);
     }
 
     public function create(){

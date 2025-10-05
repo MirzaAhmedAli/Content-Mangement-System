@@ -11,25 +11,11 @@
             @endif
     <div class="text-center p-4 max-w-4xl bg-opacity-0 bg-gray-800 rounded-lg">
       <h1 class="text-5xl font-bold font-serif text-sky-700 mb-6">AutoCar</h1>
-      <p class="text-xl text-slate-900 font-bold font-mono drop-shadow-lg">
+      <p class="text-xl text-white font-bold font-mono drop-shadow-lg">
         Welcome to AutoCar, your ultimate destination for all things automotive. Whether you're a seasoned car enthusiast or just starting your journey into the world of cars, our blog is here to fuel your passion with in-depth articles, expert reviews, and the latest industry news.
       </p> 
        <p class="text-xl text-sky-400 font-bold font-mono drop-shadow-lg">
         At AutoCar, we believe that every car has a story to tell. From the roar of a classic muscle car to the sleek lines of the latest electric vehicles, we're dedicated to exploring the beauty, performance, and innovation that make cars more than just machines. Our team of writers, mechanics, and car lovers is committed to bringing you content that not only informs but also inspires.
-        Our blog covers a wide range of topics, including:
-      </p>
-      <p class="text-xl text-slate-200 font-bold font-mono drop-shadow-lg">
-        Car Reviews: Honest and detailed reviews of the latest models, helping you make informed decisions.
-        <br>
-        Industry News: Stay up-to-date with the latest developments in the automotive world, from new technologies to market trends.
-        <br>
-        Car Culture: Dive into the lifestyle and community that surrounds cars, from motorsports to car shows.
-        <br>
-        Maintenance Tips: Practical advice and how-tos to keep your vehicle running smoothly.
-        <br>
-        Buying Guides: Expert tips on what to look for when purchasing your next car, whether it's new or used.
-        <br>
-        We’re passionate about cars, and we know you are too. That’s why we’ve created a space where car lovers can come together, share their experiences, and stay connected to the ever-evolving world of automobiles. Join us on this journey, and let’s drive forward together.
       </p>
     </div>
   </div>

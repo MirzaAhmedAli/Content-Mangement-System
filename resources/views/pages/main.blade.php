@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="overflow-x-hidden bg-gray-100">
-  <div class="px-6 py-8 bg-cover bg-center" style="background-image: url('https://img.freepik.com/free-vector/winter-blue-pink-gradient-background-vector_53876-117276.jpg?w=1380&t=st=1726124788~exp=1726125388~hmac=9ecff501c4a724506c37b32b7b841398e35beb2f162d822c014fe16068be05d1');">
-  <nav class=" border-gray-200 shadow-lg">
+<nav class=" border-gray-200 shadow-lg">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <div class="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpdwzl5xFixobB8a2WDwBgKzjNUeFfyiWkVw&s" class="h-8" alt="Flowbite Logo" />
@@ -60,38 +58,38 @@
     </div>
     </div>
   </nav>
+<div class=" bg-gray-100">
+  <div class="px-6 py-8 bg-cover bg-center" style="background-image: url('https://img.freepik.com/free-vector/winter-blue-pink-gradient-background-vector_53876-117276.jpg?w=1380&t=st=1726124788~exp=1726125388~hmac=9ecff501c4a724506c37b32b7b841398e35beb2f162d822c014fe16068be05d1');">
   
-    @if (session('status'))
-    <div class="px-4 sm:px-6 lg:px-8 mt-6 mb-5 mr-20">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 overflow-hidden shadow-sm sm:rounded-lg font-mono text-lg">
-            <div class="p-6 text-gray-900 dark:text-gray-100">
+  
+   @if (session('status'))
+<div class="px-4 sm:px-6 lg:px-8 mt-6 mb-5">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-white bg-gradient-to-r from-purple-500 to-pink-500 overflow-hidden shadow-sm sm:rounded-lg font-mono text-lg">
+            <div class="p-6">
                 <div class="alert alert-success">{{session('status')}}</div>  
             </div>
         </div>        
-        </div>     
-    </div>   
-    @endif 
+    </div>     
+</div>   
+@endif 
 
-    <div class="container flex justify-between mx-auto">
-          <div class="w-full lg:w-8/12">
-              <div class="flex items-center justify-between">
-                  {{-- <div>
-                      <select class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                          <option>Latest</option>
-                          <option>Last Week</option>
-                      </select>
-                  </div> --}}
-              </div>
-
-              
-            <h1 class="text-xl font-bold text-orange-600 md:text-4xl mt-3">Posts</h1>
-            <a href="{{route('posts.create')}}"><button type="button" class="mt-4 text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 hover:shadow-xl">Create Post</button>
+<!-- Main content with flex layout -->
+<div class=" flex flex-col">
+    <div class="flex-1 container mx-auto px-4 py-6 flex flex-col lg:flex-row">
+        <!-- Left content -->
+        <div class="w-full lg:w-8/12 lg:pr-8">
+            <h1 class="text-xl font-bold text-orange-600 md:text-4xl">Posts</h1>
+            <a href="{{route('posts.create')}}">
+                <button type="button" class="mt-4 text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800 mb-2 hover:shadow-xl">
+                    Create Post
+                </button>
             </a>
+            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
-              @foreach ($posts as $post)
-              @php $unique_id = $loop->index; @endphp
-                <!-- Post 1 -->
+                @foreach ($posts as $post)
+                @php $unique_id = $loop->index; @endphp
+                <!-- Your post cards here (keep the same post content) -->
                 <div class="rounded-lg overflow-hidden shadow-md hover:shadow-2xl">
                     <img class="w-full h-56 object-cover" src="{{asset($post->image)}}" alt="Post Image">
                     <div class="p-6 text-sky-950">
@@ -117,11 +115,12 @@
                             <p class="mt-2 text-sky-950">{{$post->description}}</p>
                         </div>
                     </div>
+                    @foreach ($post->tags as $tag)
+                      <span class="text-indigo-600 font-bold ml-4 text-left">#{{$tag->name}}</span>
+                      @endforeach
                     <div class="flex items-center justify-between p-6">
                       <a href="{{url('categories/'.$post->category->id.'/show')}}" class="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500 shadow-lg hover:shadow-xl">{{$post->category->name}}</a>
-                      @foreach ($post->tags as $tag)
-                      <span class="text-indigo-600 font-bold text-left">#{{$tag->name}}</span>
-                      @endforeach                            
+                                                  
                       <div>
                           <a href="{{route('users.profile', ['userId' => $post->user->id])}}" class="flex items-center">
                               <img src="{{asset($post->user->image)}}" class="object-cover w-10 h-10 mx-4 rounded-full">
@@ -143,52 +142,56 @@
                 </div>
                 @endforeach
             </div>
-              <div class="mt-8">
-                  <div class="flex">
-                    {{$posts->links()}}
-                  </div>
-              </div>
-          </div>
-            <div class="hidden w-4/12 -mx-8 lg:block mt-10">
-                <div class="px-8">
-                    <h1 class="mb-4 text-xl font-bold text-orange-500">Authors</h1>
-                    <div class="flex flex-col max-w-sm px-6 py-4 mx-auto  focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 rounded-lg shadow-lg hover:shadow-2xl">
-                        <ul class="-mx-4">
-                            @foreach ($users as $user)
-                                <li class="flex items-center mt-4">
-                                    <img
-                                        src="{{asset($user->image)}}"
-                                        alt="avatar"
-                                        class="object-cover w-10 h-10 mx-4 rounded-full">
-                                    <p>
-                                        <a href="{{route('users.profile', ['userId' => $user->id])}}" class="mx-1 font-bold text-gray-700 hover:underline">
-                                            {{ $user->name }}
-                                        </a>
-                                        <span class="text-sm font-light text-gray-700 text-right">
-                                            {{ $user->posts_count }} posts
-                                        </span>
-                                    </p>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
+            
+            <div class="mt-8">
+                {{$posts->links()}}
+            </div>
+        </div>
+        
+        <!-- Right sidebar -->
+        <div class="w-full lg:w-4/12 mt-8 lg:mt-10">
+            <div class="mb-8">
+                <h1 class="mb-4 text-xl font-bold text-orange-500">Authors</h1>
+                <div class="flex flex-col max-w-sm px-6 py-4 bg-white rounded-lg shadow-lg hover:shadow-2xl">
+                    <ul class="-mx-4">
+                        @foreach ($users as $user)
+                        <li class="flex items-center mt-4">
+                            <img src="{{asset($user->image)}}" alt="avatar" class="object-cover w-10 h-10 mx-4 rounded-full">
+                            <p>
+                                <a href="{{route('users.profile', ['userId' => $user->id])}}" class="mx-1 font-bold text-gray-700 hover:underline">
+                                    {{ $user->name }}
+                                </a>
+                                <span class="text-sm font-light text-gray-700 block">
+                                    {{ $user->posts_count }} posts
+                                </span>
+                            </p>
+                        </li>
+                        @endforeach
+                    </ul>
                 </div>
-              <div class="px-8 mt-10">
-                  <h1 class="mb-4 text-xl font-bold text-orange-500">Categories</h1>
-                  <div class="flex flex-col max-w-sm px-4 py-3 mx-auto focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg shadow-lg hover:shadow-2xl">
+            </div>
+            
+            <div class="mt-6">
+                <h1 class="mb-4 text-xl font-bold text-orange-500">Categories</h1>
+                <div class="flex flex-col max-w-sm px-4 py-3 bg-white rounded-lg shadow-lg hover:shadow-2xl">
                     @foreach ($categories as $category) 
-                      <ul>
-                          <li class="mt-2">-<a href="{{url('categories/'.$category->id.'/show')}}" class="mx-1 mt-6 font-bold text-gray-700 hover:text-gray-600 hover:underline">
-                            {{$category->name}}
-                        </a></li>
-                      </ul>
+                    <ul>
+                        <li class="mt-2">
+                            - <a href="{{url('categories/'.$category->id.'/show')}}" class="mx-1 font-bold text-gray-700 hover:text-gray-600 hover:underline">
+                                {{$category->name}}
+                            </a>
+                        </li>
+                    </ul>
                     @endforeach  
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-  <footer class="px-6 py-2 text-gray-100 bg-gray-800">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Your footer here -->
+
+ <footer class="px-6 py-2 text-gray-100 bg-gray-800">
       <div class="container flex flex-col items-center justify-between mx-auto md:flex-row"><a href="#"
               class="text-2xl font-bold">AutoCar</a>
           <p class="mt-2 md:mt-0">All rights reserved 2024.</p>
@@ -212,6 +215,5 @@
           </div>
       </div>
   </footer>
-</div>
 
 @endsection 

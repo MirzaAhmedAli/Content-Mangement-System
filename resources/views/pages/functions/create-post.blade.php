@@ -58,7 +58,7 @@
   </div>
 </nav>
 
-  <div class="container flex items-center justify-center mx-auto mt-32">
+  <div class="container flex items-center justify-center mx-auto px-4  mt-10">
     <div class="w-full lg:w-8/12">
     <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
   <div class="editor max-w-4xl px-6 py-2 mx-auto w-11/12 flex flex-col text-gray-800 border border-gray-300 rounded-lg p-4 shadow-lg justify-start text-left">
@@ -91,7 +91,7 @@
                           
                           <div id="doubleDropdown-{{ $category->id }}" class="subcategory-dropdown z-10 hidden bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                               <ul class="py-2 text-sm text-white dark:text-gray-200 text-left">
-                                  @foreach ($category->subcategories as $subcategory)
+                                  @foreach ($category->sub_categories as $subcategory)
                                       <li>
                                           <label class="flex items-center px-4 py-2">
                                               <input type="radio" name="subcategory_id" value="{{ $subcategory->id }}" class="mr-2">

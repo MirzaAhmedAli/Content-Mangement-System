@@ -6,7 +6,7 @@ use App\Models\Tag;
 use App\Models\Post;
 use App\Models\Categories;
 use Illuminate\Http\Request;
-use App\Models\SubCategories;
+use App\Models\SubCategory;
 use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
@@ -14,8 +14,8 @@ class PostController extends Controller
     public function create(){
         $tags = Tag::all();
         $categories = Categories::all();
-        $subcategories = SubCategories::all();
-        return view('pages.functions.create-post',[ 'categories' => $categories,'subcategories' => $subcategories, 'tags' => $tags]);
+        $subcategories = SubCategory::all();
+        return view('pages.functions.create-post',[ 'categories' => $categories,'sub_categories' => $subcategories, 'tags' => $tags]);
     }
     public function store(PostRequest $request){
         $user = auth()->user();
@@ -51,8 +51,8 @@ class PostController extends Controller
         $post = Post::findOrFail($postId);
         $tags = Tag::all();
         $categories = Categories::all();
-        $subcategories = SubCategories::all();
-        return view('pages.functions.edit-post',['categories' => $categories,'subcategories' => $subcategories, 'tags' => $tags,'post' => $post ]);
+        $subcategories = SubCategory::all();
+        return view('pages.functions.edit-post',['categories' => $categories,'sub_categories' => $subcategories, 'tags' => $tags,'post' => $post ]);
     }
 
     public function update(PostRequest $request,int $postId){

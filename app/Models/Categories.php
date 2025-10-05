@@ -22,8 +22,8 @@ class Categories extends Model
         'image'
     ];    
 
-    public function subcategories(){
-        return $this->hasMany(SubCategories::class, 'category_id');
+    public function sub_categories(){
+        return $this->hasMany(SubCategory::class, 'category_id');
     }
 
     public function posts(){

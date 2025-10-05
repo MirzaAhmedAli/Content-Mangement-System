@@ -56,7 +56,7 @@
   </div>
 </nav>
    
-  <div class="container px-6 py-10 mx-auto">
+  <div class="container px-6 py-10 mx-auto min-h-screen flex flex-col">
       <h1 class="text-3xl font-semibold text-amber-200 capitalize lg:text-4xl dark:text-white font-serif ">Categories</h1>
       @if (session('status'))
       <div class="px-4 sm:px-6 lg:px-8 mt-6 mr-20">
@@ -119,7 +119,9 @@
         @endforeach
     </div>
   </div>
-  <footer class="px-6 py-2 text-gray-100 bg-gray-800">
+  
+</section>
+<footer class="px-6 py-2 text-gray-100 bg-gray-800">
     <div class="container flex flex-col items-center justify-between mx-auto md:flex-row"><a href="#"
             class="text-2xl font-bold">AutoCar</a>
         <p class="mt-2 md:mt-0">All rights reserved 2024.</p>
@@ -143,6 +145,5 @@
         </div>
     </div>
 </footer>
-</section>
 @endsection
 

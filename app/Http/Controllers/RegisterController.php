@@ -26,7 +26,7 @@ class RegisterController extends Controller
         'country' => $request->country,
         'password' => Hash::make($request->password)
     ]);
-    Mail::to($user->email)->send(new RegisterEmail($user));
+    //Mail::to($user->email)->send(new RegisterEmail($user));
 
         event(new Registered($user));
             Auth::login($user);
